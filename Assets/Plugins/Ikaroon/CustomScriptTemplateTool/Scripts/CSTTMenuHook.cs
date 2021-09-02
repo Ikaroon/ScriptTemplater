@@ -14,14 +14,28 @@ namespace Ikaroon.CSTT {
     
     public class CSTTMenuHook {
         
-        [MenuItem("Assets/Create/ExampleTemplate", true, 81)]
+        [MenuItem("Assets/Create/Create ExampleTemplate", true, 81)]
         private static bool ExampleTemplateValidate() {
             return ScriptBuilder.ValidateSelection();
         }
         
-        [MenuItem("Assets/Create/ExampleTemplate", false, 81)]
+        [MenuItem("Assets/Create/Create ExampleTemplate", false, 81)]
         private static void ExampleTemplate() {
-            ScriptBuilder.GenerateFile("ExampleTemplate", "namespace #FOLDER#\n{\n\tpublic class #NAME#\n\t{\n\t}\n}");
+            ScriptBuilder.GenerateFile("ExampleTemplate", @"// <copyright file=""#FILE#"" company=""#COMPANY#"">
+// Copyright (c) #YEAR# All Rights Reserved
+// </copyright>
+// <author>#UNITYUSER#</author>
+// <date>#DATE#</date>
+// <summary>A class created a custom template!</summary>
+
+using UnityEngine;
+
+namespace #FOLDER#
+{
+	public class #NAME#
+	{
+	}
+}");
         }
     }
 }

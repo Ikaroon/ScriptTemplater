@@ -1,11 +1,9 @@
-﻿using System.CodeDom;
+﻿using System;
+using System.CodeDom;
 using System.CodeDom.Compiler;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
@@ -21,21 +19,29 @@ namespace Ikaroon.CSTT
 			AssetDatabase.CreateAsset(textAsset, assetPath);
 
 			var fullPath = Path.Combine(Directory.GetParent(Application.dataPath).FullName, assetPath);
+			var newPath = Path.ChangeExtension(fullPath, ".cs");
 
 			var content = textAsset.text;
 
 			var className = ScriptBuilder.GenerateValidClassName(Path.GetFileName(fullPath));
 
-			content = content.Replace(ScriptBuilder.FileName, className);
-			var folderSpace = assetPath.Replace("/", ".");
+			content = content.Replace(ScriptBuilder.FormattedFileName, className);
+
+			var folderSpace = Directory.GetParent(assetPath).ToString();
+			folderSpace = folderSpace.Replace("/", ".");
 			folderSpace = folderSpace.Replace("\\", ".");
 			folderSpace = folderSpace.Replace(".", "_");
 			folderSpace = ScriptBuilder.GenerateValidClassName(folderSpace);
 			folderSpace = folderSpace.Replace("_", ".");
 			content = content.Replace(ScriptBuilder.Folder, folderSpace);
 
+			content = content.Replace(ScriptBuilder.Date, DateTime.Now.ToString("d"));
+			content = content.Replace(ScriptBuilder.Year, DateTime.Now.ToString("yyyy"));
+			content = content.Replace(ScriptBuilder.UnityUser, CloudProjectSettings.userName);
+			content = content.Replace(ScriptBuilder.Company, PlayerSettings.companyName);
+			content = content.Replace(ScriptBuilder.FileName, Path.GetFileName(newPath));
+
 			File.WriteAllText(fullPath, content);
-			var newPath = Path.ChangeExtension(fullPath, ".cs");
 			File.Move(fullPath, newPath);
 			File.Delete(fullPath + ".meta");
 			AssetDatabase.Refresh();
@@ -49,8 +55,13 @@ namespace Ikaroon.CSTT
 
 	public static class ScriptBuilder
 	{
-		internal const string FileName = "#NAME#";
+		internal const string FormattedFileName = "#NAME#";
+		internal const string FileName = "#FILE#";
 		internal const string Folder = "#FOLDER#";
+		internal const string Date = "#DATE#";
+		internal const string Year = "#YEAR#";
+		internal const string UnityUser = "#UNITYUSER#";
+		internal const string Company = "#COMPANY#";
 		const string ClassNameChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_";
 
 		public static void GenerateFile(string temporaryName, string content)
@@ -142,7 +153,7 @@ namespace Ikaroon.CSTT
 				returnStatement.Expression = validation;
 
 				var validationAttribute = new CodeAttributeDeclaration(csMenuItemAttributeType.Type,
-					new CodeAttributeArgument(new CodePrimitiveExpression("Assets/Create/" + template.Name)),
+					new CodeAttributeArgument(new CodePrimitiveExpression("Assets/Create/Create " + template.Name)),
 					new CodeAttributeArgument(new CodePrimitiveExpression(true)),
 					new CodeAttributeArgument(new CodePrimitiveExpression(81)));
 
@@ -160,7 +171,7 @@ namespace Ikaroon.CSTT
 					new CodePrimitiveExpression(template.Content));
 
 				var attribute = new CodeAttributeDeclaration(csMenuItemAttributeType.Type,
-					new CodeAttributeArgument(new CodePrimitiveExpression("Assets/Create/" + template.Name)),
+					new CodeAttributeArgument(new CodePrimitiveExpression("Assets/Create/Create " + template.Name)),
 					new CodeAttributeArgument(new CodePrimitiveExpression(false)),
 					new CodeAttributeArgument(new CodePrimitiveExpression(81)));
 

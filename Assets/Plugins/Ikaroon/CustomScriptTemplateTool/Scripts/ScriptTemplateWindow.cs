@@ -10,7 +10,12 @@ namespace Ikaroon.CSTT
 	{
 		const string HelpText =
 			"Use #NAME# for the file and class name\n" +
-			"Use #FOLDER# for using the folder as namespace for example. '/' will be replaced with '.'";
+			"Use #FOLDER# for using the folder as namespace for example. '/' will be replaced with '.'\n" +
+			"Use #FILE# for the script file name with extension e.g.: Script.cs\n" +
+			"Use #YEAR# for the year the script was created in\n" +
+			"Use #DATE# for the date the script was created on\n" +
+			"Use #COMPANY# for the company name that is set in the player settings\n" +
+			"Use #UNITYUSER# for the username that's used at the moment";
 
 		[MenuItem("Tools/Ikaroon/Script Templates")]
 		static void Init()
