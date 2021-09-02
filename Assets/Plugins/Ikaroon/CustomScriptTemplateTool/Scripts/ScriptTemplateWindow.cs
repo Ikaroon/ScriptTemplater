@@ -15,7 +15,8 @@ namespace Ikaroon.CSTT
 			"Use #YEAR# for the year the script was created in\n" +
 			"Use #DATE# for the date the script was created on\n" +
 			"Use #COMPANY# for the company name that is set in the player settings\n" +
-			"Use #UNITYUSER# for the username that's used at the moment";
+			"Use #UNITYUSER# for the username that's used at the moment\n" +
+			"Use #SCRIPTTYPE# for automatically choosing between interface, class, and abstract class depending on the descriptors.";
 
 		[MenuItem("Tools/Ikaroon/Script Templates")]
 		static void Init()
@@ -45,8 +46,11 @@ namespace Ikaroon.CSTT
 
 				if (child.Expanded)
 				{
-					child.Name = EditorGUILayout.TextField(child.Name);
+					child.Name = EditorGUILayout.TextField(new GUIContent("Name"), child.Name);
+					EditorGUILayout.LabelField(new GUIContent("Content"));
 					child.Content = EditorGUILayout.TextArea(child.Content);
+					child.InterfaceDescriptor = EditorGUILayout.TextField(new GUIContent("Interface Descriptor"), child.InterfaceDescriptor);
+					child.AbstractDescriptor = EditorGUILayout.TextField(new GUIContent("Abstract Descriptor"), child.AbstractDescriptor);
 				}
 
 				EditorGUILayout.Space();

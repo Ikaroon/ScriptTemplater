@@ -12,6 +12,8 @@ namespace Ikaroon.CSTT
 {
 	internal class DoCreateNewAsset : EndNameEditAction
 	{
+		ScriptTemplate m_template;
+
 		public override void Action(int instanceId, string pathName, string resourceFile)
 		{
 			var assetPath = AssetDatabase.GenerateUniqueAssetPath(pathName);
@@ -20,8 +22,9 @@ namespace Ikaroon.CSTT
 
 			var fullPath = Path.Combine(Directory.GetParent(Application.dataPath).FullName, assetPath);
 			var newPath = Path.ChangeExtension(fullPath, ".cs");
+			var fileName = Path.GetFileName(newPath);
 
-			var content = textAsset.text;
+			var content = m_template.Content;
 
 			var className = ScriptBuilder.GenerateValidClassName(Path.GetFileName(fullPath));
 
@@ -39,7 +42,8 @@ namespace Ikaroon.CSTT
 			content = content.Replace(ScriptBuilder.Year, DateTime.Now.ToString("yyyy"));
 			content = content.Replace(ScriptBuilder.UnityUser, CloudProjectSettings.userName);
 			content = content.Replace(ScriptBuilder.Company, PlayerSettings.companyName);
-			content = content.Replace(ScriptBuilder.FileName, Path.GetFileName(newPath));
+			content = content.Replace(ScriptBuilder.FileName, fileName);
+			content = content.Replace(ScriptBuilder.ScriptType, m_template.GetScriptTypeFromName(fileName));
 
 			File.WriteAllText(fullPath, content);
 			File.Move(fullPath, newPath);
@@ -50,6 +54,11 @@ namespace Ikaroon.CSTT
 		public override void Cancelled(int instanceId, string pathName, string resourceFile)
 		{
 			Selection.activeObject = null;
+		}
+
+		public void SetTemplate(ScriptTemplate template)
+		{
+			m_template = template;
 		}
 	}
 
@@ -62,17 +71,20 @@ namespace Ikaroon.CSTT
 		internal const string Year = "#YEAR#";
 		internal const string UnityUser = "#UNITYUSER#";
 		internal const string Company = "#COMPANY#";
+		internal const string ScriptType = "#SCRIPTTYPE#";
 		const string ClassNameChars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_";
 
-		public static void GenerateFile(string temporaryName, string content)
+		public static void GenerateFile(int template)
 		{
-			var text = content;
-			var script = new TextAsset(text);
+			var createOperation = ScriptableObject.CreateInstance<DoCreateNewAsset>();
+			var templateObject = ScriptTemplateData.instance.Templates[template];
+			createOperation.SetTemplate(templateObject);
+			var script = new TextAsset();
 			var path = AssetDatabase.GetAssetPath(Selection.activeObject);
-			path = Path.Combine(path, temporaryName);
+			path = Path.Combine(path, templateObject.Name);
 			ProjectWindowUtil.StartNameEditingIfProjectWindowExists(
 				script.GetInstanceID(),
-				ScriptableObject.CreateInstance<DoCreateNewAsset>(),
+				createOperation,
 				path,
 				AssetPreview.GetMiniThumbnail(script), null);
 		}
@@ -167,8 +179,7 @@ namespace Ikaroon.CSTT
 
 				CodeMethodInvokeExpression generation = new CodeMethodInvokeExpression(
 					csScriptBuilderType, nameof(GenerateFile),
-					new CodePrimitiveExpression(template.Name),
-					new CodePrimitiveExpression(template.Content));
+					new CodePrimitiveExpression(ScriptTemplateData.instance.ScriptTemplates.IndexOf(template)));
 
 				var attribute = new CodeAttributeDeclaration(csMenuItemAttributeType.Type,
 					new CodeAttributeArgument(new CodePrimitiveExpression("Assets/Create/Create " + template.Name)),

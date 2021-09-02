@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace Ikaroon.CSTT
@@ -22,6 +23,22 @@ namespace Ikaroon.CSTT
 		[SerializeField]
 		string m_content;
 
+		public string InterfaceDescriptor
+		{
+			get { return m_interfaceDescriptor; }
+			internal set { m_interfaceDescriptor = value; }
+		}
+		[SerializeField]
+		string m_interfaceDescriptor = "^I[A-Z]";
+
+		public string AbstractDescriptor
+		{
+			get { return m_abstractDescriptor; }
+			internal set { m_abstractDescriptor = value; }
+		}
+		[SerializeField]
+		string m_abstractDescriptor = "^A[A-Z]";
+
 		public bool Expanded
 		{
 			get { return m_expanded; }
@@ -41,6 +58,16 @@ namespace Ikaroon.CSTT
 			content.AppendLine("}");
 
 			return content.ToString();
+		}
+
+		public string GetScriptTypeFromName(string name)
+		{
+			if (Regex.IsMatch(name, m_interfaceDescriptor))
+				return "interface";
+			if (Regex.IsMatch(name, m_abstractDescriptor))
+				return "abstract class";
+
+			return "class";
 		}
 	}
 }

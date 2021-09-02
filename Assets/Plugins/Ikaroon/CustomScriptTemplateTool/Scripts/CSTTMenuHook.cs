@@ -21,21 +21,7 @@ namespace Ikaroon.CSTT {
         
         [MenuItem("Assets/Create/Create ExampleTemplate", false, 81)]
         private static void ExampleTemplate() {
-            ScriptBuilder.GenerateFile("ExampleTemplate", @"// <copyright file=""#FILE#"" company=""#COMPANY#"">
-// Copyright (c) #YEAR# All Rights Reserved
-// </copyright>
-// <author>#UNITYUSER#</author>
-// <date>#DATE#</date>
-// <summary>A class created a custom template!</summary>
-
-using UnityEngine;
-
-namespace #FOLDER#
-{
-	public class #NAME#
-	{
-	}
-}");
+            ScriptBuilder.GenerateFile(0);
         }
     }
 }
