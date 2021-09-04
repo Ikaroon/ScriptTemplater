@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEditor.UIElements;
+using System.IO;
 
 namespace Ikaroon.CSTT
 {
@@ -18,53 +18,73 @@ namespace Ikaroon.CSTT
 			"Use #UNITYUSER# for the username that's used at the moment\n" +
 			"Use #SCRIPTTYPE# for automatically choosing between interface, class, and abstract class depending on the descriptors.";
 
-		[MenuItem("Tools/Ikaroon/Script Templates")]
-		static void Init()
+		[SerializeField]
+		SerializedProperty m_template;
+
+		public static ScriptTemplateWindow Edit(SerializedProperty templateProperty)
 		{
-			var window = GetWindow<ScriptTemplateWindow>();
-			window.titleContent = new GUIContent("Script Templates");
-			window.Show();
+			var nameProperty = templateProperty.FindPropertyRelative("m_name");
+			ScriptTemplateWindow window = CreateInstance<ScriptTemplateWindow>();
+			window.titleContent = new GUIContent($"Edit Template: {nameProperty.stringValue}");
+			window.m_template = templateProperty;
+			window.ShowUtility();
+			return window;
 		}
 
-		void OnGUI()
+		void CreateGUI()
 		{
-			EditorGUILayout.HelpBox(new GUIContent(HelpText));
-
-			foreach (var child in ScriptTemplateData.instance.ScriptTemplates.ToArray())
+			if (m_template == null)
 			{
-				EditorGUILayout.BeginHorizontal();
-				child.Expanded = EditorGUILayout.Foldout(child.Expanded, "Template: " + child.Name);
-				if (GUILayout.Button("Clear", GUILayout.Width(50f)))
-				{
-					child.Content = string.Empty;
-				}
-				if (GUILayout.Button("X", GUILayout.Width(20f)))
-				{
-					ScriptTemplateData.instance.ScriptTemplates.Remove(child);
-				}
-				EditorGUILayout.EndHorizontal();
-
-				if (child.Expanded)
-				{
-					child.Name = EditorGUILayout.TextField(new GUIContent("Name"), child.Name);
-					EditorGUILayout.LabelField(new GUIContent("Content"));
-					child.Content = EditorGUILayout.TextArea(child.Content);
-					child.InterfaceDescriptor = EditorGUILayout.TextField(new GUIContent("Interface Descriptor"), child.InterfaceDescriptor);
-					child.AbstractDescriptor = EditorGUILayout.TextField(new GUIContent("Abstract Descriptor"), child.AbstractDescriptor);
-				}
-
-				EditorGUILayout.Space();
+				Close();
+				return;
 			}
 
-			if (GUILayout.Button("Add Template"))
-			{
-				ScriptTemplateData.instance.ScriptTemplates.Add(new ScriptTemplate());
-			}
+			VisualElement root = rootVisualElement;
 
-			if (GUILayout.Button(new GUIContent("Apply")))
+			// Import UXML
+			var visualTree = Resources.Load<VisualTreeAsset>("Ikaroon/UI/ScriptTemplateWindow");
+			VisualElement uxml = visualTree.Instantiate();
+			uxml.style.flexGrow = 1;
+			root.Add(uxml);
+
+			var nameProperty = m_template.FindPropertyRelative("m_name");
+			var nameElement = uxml.Q<TextField>("name-field");
+			nameElement.BindProperty(nameProperty);
+
+			var contentProperty = m_template.FindPropertyRelative("m_content");
+			var contentElement = uxml.Q<TextField>("content-field");
+			contentElement.BindProperty(contentProperty);
+
+			var interfaceProperty = m_template.FindPropertyRelative("m_interfaceDescriptor");
+			var interfaceElement = uxml.Q<TextField>("interface-field");
+			interfaceElement.BindProperty(interfaceProperty);
+
+			var abstractProperty = m_template.FindPropertyRelative("m_abstractDescriptor");
+			var abstractElement = uxml.Q<TextField>("abstract-field");
+			abstractElement.BindProperty(abstractProperty);
+
+			var removeButton = uxml.Q<Button>("import-button");
+			removeButton.clicked += OnImportButtonClicked;
+		}
+
+		void OnImportButtonClicked()
+		{
+			var filePath = EditorUtility.OpenFilePanel("Import Script Template", Application.dataPath, "txt");
+			if (string.IsNullOrEmpty(filePath))
+				return;
+
+			try 
 			{
-				ScriptTemplateData.instance.Save();
-				ScriptBuilder.GenerateScript();
+				var content = File.ReadAllText(filePath);
+
+				var contentProperty = m_template.FindPropertyRelative("m_content");
+				contentProperty.stringValue = content;
+				m_template.serializedObject.ApplyModifiedProperties();
+			}
+			catch (IOException e)
+			{
+				// Import failed
+				EditorUtility.DisplayDialog("Import failed", "The import failed with the following error: " + e.Message, "OK");
 			}
 		}
 	}

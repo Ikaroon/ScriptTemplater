@@ -14,12 +14,12 @@ namespace Ikaroon.CSTT {
     
     public class CSTTMenuHook {
         
-        [MenuItem("Assets/Create/Create ExampleTemplate", true, 81)]
+        [MenuItem("Assets/Create/Create Example Template", true, 81)]
         private static bool ExampleTemplateValidate() {
             return ScriptBuilder.ValidateSelection();
         }
         
-        [MenuItem("Assets/Create/Create ExampleTemplate", false, 81)]
+        [MenuItem("Assets/Create/Create Example Template", false, 81)]
         private static void ExampleTemplate() {
             ScriptBuilder.GenerateFile(0);
         }

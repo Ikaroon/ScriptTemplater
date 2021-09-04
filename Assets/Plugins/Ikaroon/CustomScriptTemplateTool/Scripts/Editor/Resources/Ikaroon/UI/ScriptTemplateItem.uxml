@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+	<Style src="ScriptTemplateItem.uss" />
+	<ui:VisualElement name="Template-Item" class="ikaroon-template-item">
+		<ui:VisualElement name="Icon" class="ikaroon-template-icon" />
+		<ui:Label name="template-name" text="Template Name" display-tooltip-when-elided="true" class="ikaroon-template-label" />
+		<ui:Button name="edit-button" display-tooltip-when-elided="true" class="ikaroon-template-button">
+			<ui:VisualElement class="ikaroon-button-icon" style="background-image: url(&apos;../Icons/Icon_Edit.png&apos;);" />
+		</ui:Button>
+		<ui:Button name="remove-button" display-tooltip-when-elided="true" class="ikaroon-template-button">
+			<ui:VisualElement class="ikaroon-button-icon" style="background-image: url(&apos;../Icons/Icon_Delete.png&apos;);" />
+		</ui:Button>
+	</ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,27 @@
+.ikaroon-edit-body {
+	flex-grow: 1;
+}
+
+.ikaroon-tall-input > .unity-base-text-field__input {
+	-unity-text-align: upper-left;
+}
+
+.ikaroon-edit-helpbox {
+	background-color: var(--unity-colors-helpbox-background);
+	border-left-width: 1px;
+	border-right-width: 1px;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-top-color: var(--unity-colors-helpbox-border);
+	justify-content: flex-start;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	align-items: flex-start;
+}
+
+.ikaroon-edit-helpbox-label {
+	white-space: normal;
+	font-size: 10px;
+}

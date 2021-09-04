@@ -21,7 +21,7 @@ namespace Ikaroon.CSTT
 
 		public void Save()
 		{
-			base.Save(false);
+			base.Save(true);
 		}
 	}
 }

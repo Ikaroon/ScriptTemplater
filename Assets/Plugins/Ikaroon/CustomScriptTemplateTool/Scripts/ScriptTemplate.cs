@@ -39,14 +39,6 @@ namespace Ikaroon.CSTT
 		[SerializeField]
 		string m_abstractDescriptor = "^A[A-Z]";
 
-		public bool Expanded
-		{
-			get { return m_expanded; }
-			internal set { m_expanded = value; }
-		}
-		[SerializeField]
-		bool m_expanded;
-
 		public string GenerateMethod()
 		{
 			var content = new StringBuilder();
