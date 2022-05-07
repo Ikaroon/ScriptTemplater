@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
-	<ui:Template name="ScriptTemplateItemUI" src="ScriptTemplateItemUI.uxml" />
+	<ui:Template name="ScriptTemplateItem" src="ScriptTemplateItem.uxml" />
 	<Style src="ScriptTemplatesWindow.uss" />
 	<ui:VisualElement name="Body" class="ikaroon-body">
 		<ui:VisualElement name="Top" class="ikaroon-top">
