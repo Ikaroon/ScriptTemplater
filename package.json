@@ -1,0 +1,22 @@
+{
+  "name": "com.ikaroon.scripttemplater",
+  "version": "1.0.0",
+  "displayName": "Script Templater",
+  "description": "A tool that let's you add custom script templates per project.",
+  "unity": "2020.3",
+  "keywords": [
+    "ikaroon",
+    "script",
+    "c#",
+    "template",
+    "asset",
+    "creation"
+  ],
+  "author": {
+    "name": "Ikaroon",
+    "email": "hi@marian-brinkmann.com",
+    "url": "https://marian-brinkmann.com/"
+  },
+  "type": "tool",
+  "license": "See LICENSE.md file"
+}

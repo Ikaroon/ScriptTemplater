@@ -1,0 +1,21 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+	<Style src="ScriptTemplateWindow.uss" />
+	<Style src="ScriptTemplatesWindow.uss" />
+	<ui:VisualElement class="ikaroon-edit-body">
+		<ui:VisualElement class="ikaroon-top">
+			<ui:Button name="import-button" display-tooltip-when-elided="true" tooltip="Import" class="ikaroon-button">
+				<ui:VisualElement class="ikaroon-button-icon" style="background-image: url(&apos;../Icons/Icon_Import.png&apos;);" />
+			</ui:Button>
+		</ui:VisualElement>
+		<ui:ScrollView style="flex-grow: 1; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">
+			<ui:TextField picking-mode="Ignore" label="Name" name="name-field" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 5px; padding-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0;" />
+			<ui:Label text="Content" display-tooltip-when-elided="true" style="padding-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0;" />
+			<ui:TextField picking-mode="Ignore" multiline="true" name="content-field" class="ikaroon-tall-input" style="min-height: 128px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 5px;" />
+			<ui:TextField picking-mode="Ignore" label="Interface Descriptor" name="interface-field" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-bottom: 5px;" />
+			<ui:TextField picking-mode="Ignore" label="Abstract Descriptor" name="abstract-field" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-bottom: 5px;" />
+		</ui:ScrollView>
+		<ui:VisualElement class="ikaroon-edit-helpbox">
+			<ui:Label text="Use #NAME# for the file and class name&#10;Use #FOLDER# for using the folder as namespace for example. &apos;/&apos; will be replaced with &apos;.&apos;&#10;Use #FILE# for the script file name with extension e.g.: Script.cs&#10;Use #YEAR# for the year the script was created in&#10;Use #DATE# for the date the script was created on&#10;Use #COMPANY# for the company name that is set in the player settings&#10;Use #UNITYUSER# for the username that&apos;s used at the moment&#10;Use #SCRIPTTYPE# for automatically choosing between interface, class, and abstract class depending on the descriptors." display-tooltip-when-elided="true" class="ikaroon-edit-helpbox-label" />
+		</ui:VisualElement>
+	</ui:VisualElement>
+</ui:UXML>
