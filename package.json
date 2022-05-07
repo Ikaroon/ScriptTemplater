@@ -17,6 +17,13 @@
     "email": "hi@marian-brinkmann.com",
     "url": "https://marian-brinkmann.com/"
   },
+  "samples": [
+    {
+      "displayName": "Script Templates",
+      "description": "Contains sample script templates that you can import",
+      "path": "Samples~/SamplesTemplates"
+    }
+  ],
   "type": "tool",
   "license": "See LICENSE.md file"
 }

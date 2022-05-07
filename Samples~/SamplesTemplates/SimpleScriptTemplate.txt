@@ -1,0 +1,16 @@
+// <copyright file=\"#FILE#\" company=\"#COMPANY#\">
+// Copyright (c) #YEAR# All Rights Reserved
+// </copyright>
+// <author>#UNITYUSER#</author>
+// <date>#DATE#</date>
+// <summary>A class created by a custom template!</summary>
+
+using UnityEngine;
+
+namespace #FOLDER#
+{
+	public #SCRIPTTYPE# #NAME#
+	{
+		
+	}
+}
