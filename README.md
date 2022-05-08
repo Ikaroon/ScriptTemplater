@@ -1,6 +1,17 @@
+![ScriptTemplater](https://user-images.githubusercontent.com/65419234/167275974-ef26c2ea-26de-4648-9d06-1c8de628a90c.png)
+
+<p align=center><a href="https://github.com/Ikaroon/ScriptTemplater/blob/master/LICENSE"><img src="https://badgen.net/github/license/Naereen/Strapdown.js"/></a>
+<a href="https://GitHub.com/Ikaroon/ScriptTemplater/releases/"><img src="https://img.shields.io/badge/Release-1.0.0-yellow.svg"/></a>
+<a href="https://ko-fi.com/ikaroon"><img src="https://img.shields.io/badge/Donate-Ko--Fi-red.svg"/></a></p>
+
 # Script Templater
 This tool allows you to add custom script templates and create instances of them just like a normal monobehaviour.
 As this is still a quick and dirty version I don't garantuee that it works without any issues.
+
+## Features
+- [x] Creation of script templates
+- [x] Import of script templates
+- [ ] Export of script templates
 
 ## Installation
 
@@ -10,7 +21,7 @@ As this is still a quick and dirty version I don't garantuee that it works witho
 3. Select `Add package from git URL...`
 4. Enter `https://github.com/Ikaroon/ScriptTemplater.git` as url and confirm
  
-## The Tool
+## How to use
 ![Script Template Settings](https://marian-brinkmann.com/wp-content/uploads/2021/09/GitHub_CustomScriptTemplateTool_Settings.png)
 
 The picture above shows how the tool looks like to add new templates.
