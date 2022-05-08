@@ -6,7 +6,6 @@
 
 # Script Templater
 This tool allows you to add custom script templates and create instances of them just like a normal monobehaviour.
-As this is still a quick and dirty version I don't garantuee that it works without any issues.
 
 ## Features
 - [x] Creation of script templates
