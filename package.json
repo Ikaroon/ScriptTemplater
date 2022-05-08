@@ -25,5 +25,8 @@
     }
   ],
   "type": "tool",
-  "license": "See LICENSE.md file"
+  "documentationUrl": "https://github.com/Ikaroon/ScriptTemplater",
+  "changelogUrl": "https://github.com/Ikaroon/ScriptTemplater/commits/main",
+  "license": "See LICENSE.md file",
+  "licensesUrl": "https://github.com/Ikaroon/ScriptTemplater/blob/main/LICENSE"
 }
