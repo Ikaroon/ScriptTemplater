@@ -1,8 +1,8 @@
 ![ScriptTemplater](https://user-images.githubusercontent.com/65419234/167275974-ef26c2ea-26de-4648-9d06-1c8de628a90c.png)
 
 <p align=center><a href="https://github.com/Ikaroon/ScriptTemplater/blob/master/LICENSE"><img src="https://badgen.net/github/license/Naereen/Strapdown.js"/></a>
-<a href="https://GitHub.com/Ikaroon/ScriptTemplater/releases/"><img src="https://img.shields.io/badge/Release-1.0.0-green.svg"/></a>
-<a href="https://ko-fi.com/ikaroon"><img src="https://img.shields.io/badge/Donate-Ko--Fi-red.svg"/></a></p>
+<a href="https://GitHub.com/Ikaroon/ScriptTemplater/releases/"><img src="https://img.shields.io/badge/release-1.0.0-green.svg"/></a>
+<img alt="GitHub (Pre-)Release Date" src="https://img.shields.io/github/release-date-pre/Ikaroon/ScriptTemplater"></p>
 
 # Script Templater
 This tool allows you to add custom script templates and create instances of them just like a normal monobehaviour.
@@ -44,4 +44,4 @@ Work on this project happens in my freetime and, therefore, I cannot promise if 
 ## Donation
 If this project helped you, you can treat me to a coffee if you want ☕
 
-[![Donate](https://img.shields.io/badge/Donate-Ko--Fi-red.svg)](https://ko-fi.com/ikaroon)
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B1CKI7W)
