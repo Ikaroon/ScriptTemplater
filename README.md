@@ -1,4 +1,4 @@
-<p align=center><img alt="Swizzle Logo" width="400px" src="https://user-images.githubusercontent.com/65419234/167305506-600e4f0f-781c-4b88-a1a5-27b9de4a2248.png"/></p>
+<p align=center><img alt="ScriptTemplater Logo" width="400px" src="https://user-images.githubusercontent.com/65419234/167305506-600e4f0f-781c-4b88-a1a5-27b9de4a2248.png"/></p>
 
 <p align=center><a href="https://github.com/Ikaroon/ScriptTemplater/blob/master/LICENSE"><img src="https://badgen.net/github/license/Naereen/Strapdown.js"/></a>
 <a href="https://GitHub.com/Ikaroon/ScriptTemplater/releases/"><img src="https://img.shields.io/badge/release-1.0.0-green.svg"/></a>
